@@ -22,6 +22,11 @@ namespace SmartSchool.API
         {
             services.AddDbContext<SmartContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("Default")));
+
+            services.AddScoped<IRepository, Repository>();
+            //services.AddSingleton<IRepository, Repository>();
+            //services.AddTransient<IRepository, Repository>();
+
             services.AddControllers();
         }
 
