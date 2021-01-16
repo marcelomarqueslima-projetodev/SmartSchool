@@ -18,7 +18,6 @@ namespace SmartSchool.API.Controllers
             _repo = repo;
         }
 
-
         [HttpGet]
         public IActionResult Get()
         {
@@ -27,7 +26,7 @@ namespace SmartSchool.API.Controllers
         }
 
         //[HttpGet("{id:int}")]
-        [HttpGet("byId/{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var professor = _repo.GetProfessorId(id, false);
