@@ -9,9 +9,7 @@ namespace SmartSchool.API.Models
         {
             this.AlunoId = alunoId;
             this.DisciplinaId = disciplinaId;
-
         }
-
         public DateTime DataIni { get; set; } = DateTime.Now;
         public DateTime? DataFim { get; set; }
         public int? Nota { get; set; } = null;

@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.EntityFrameworkCore;
 using SmartSchool.API.Models;
-using SQLitePCL;
+using System.Linq;
 
 namespace SmartSchool.API.Data
 {
@@ -41,7 +39,7 @@ namespace SmartSchool.API.Data
 
             if (includeProfessor)
             {
-                query = query.Include(a => a.AlunoDisciplina)
+                query = query.Include(a => a.AlunosDisciplinas)
                     .ThenInclude(ad => ad.Disciplina)
                     .ThenInclude(d => d.Professor);
             }
@@ -57,14 +55,14 @@ namespace SmartSchool.API.Data
 
             if (includeProfessor)
             {
-                query = query.Include(a => a.AlunoDisciplina)
+                query = query.Include(a => a.AlunosDisciplinas)
                     .ThenInclude(ad => ad.Disciplina)
                     .ThenInclude(d => d.Professor);
             }
 
             query = query.AsNoTracking()
                 .OrderBy(a => a.Id)
-                .Where(aluno => aluno.AlunoDisciplina.Any(ad => ad.DisciplinaId == disciplinaId));
+                .Where(aluno => aluno.AlunosDisciplinas.Any(ad => ad.DisciplinaId == disciplinaId));
 
             return query.ToArray();
         }
@@ -75,7 +73,7 @@ namespace SmartSchool.API.Data
 
             if (includeProfessor)
             {
-                query = query.Include(a => a.AlunoDisciplina)
+                query = query.Include(a => a.AlunosDisciplinas)
                     .ThenInclude(ad => ad.Disciplina)
                     .ThenInclude(d => d.Professor);
             }
@@ -92,8 +90,8 @@ namespace SmartSchool.API.Data
 
             if (includeAlunos)
             {
-                query = query.Include(a => a.Disciplina)
-                    .ThenInclude(ad => ad.AlunoDisciplina)
+                query = query.Include(a => a.Disciplinas)
+                    .ThenInclude(ad => ad.AlunosDisciplinas)
                     .ThenInclude(d => d.Aluno);
             }
 
@@ -108,15 +106,15 @@ namespace SmartSchool.API.Data
 
             if (includeAlunos)
             {
-                query = query.Include(a => a.Disciplina)
-                    .ThenInclude(ad => ad.AlunoDisciplina)
+                query = query.Include(a => a.Disciplinas)
+                    .ThenInclude(ad => ad.AlunosDisciplinas)
                     .ThenInclude(d => d.Aluno);
             }
 
             query = query.AsNoTracking()
                 .OrderBy(aluno => aluno.Id)
-                .Where(aluno =>aluno.Disciplina.Any(
-                    ad => ad.AlunoDisciplina.Any(
+                .Where(aluno =>aluno.Disciplinas.Any(
+                    ad => ad.AlunosDisciplinas.Any(
                     ad => ad.DisciplinaId == disciplinaId)));
 
             return query.ToArray();
@@ -128,8 +126,8 @@ namespace SmartSchool.API.Data
 
             if (includeAlunos)
             {
-                query = query.Include(a => a.Disciplina)
-                    .ThenInclude(ad => ad.AlunoDisciplina)
+                query = query.Include(a => a.Disciplinas)
+                    .ThenInclude(ad => ad.AlunosDisciplinas)
                     .ThenInclude(d => d.Aluno);
             }
 
